@@ -1,8 +1,8 @@
 
-# WIP Microservice_docker_jenkinsfile_deployment
+# WIP Docker based Microservice deployment via jenkinsfile
 Docker based Microservice - push to registry via Jenkins tool by defining steps in jenkinsfile
 
-####Pre-requisite 
+#### Pre-requisite 
 * You should have docker installed on your machine.
 
 ```$xslt
@@ -16,5 +16,8 @@ $ docker images
 REPOSITORY                                                TAG                 IMAGE ID            CREATED              SIZE
 microservice-jenkins-docker/microservice-jenkins-docker   latest              541e5d2424f5        About a minute ago   124MB
 ```
+
+Set up jenkins via docker as defined here https://github.com/RitreshGirdhar/jenkins-with-docker 
+Once jenkins is up.
 
 Happy learning :) 
