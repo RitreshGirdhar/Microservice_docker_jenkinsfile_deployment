@@ -1,31 +1,30 @@
-def STAGES=["Code Checkout","Code Compile"]
-if (env.UnitTesting == "true") {
-           STAGES.add("Unit Testing")
-}
-         if (env.CodeAnalysis == "true") {
-           STAGES.add("SonarQube Analysis")
-         }
-         if (env.QualityGates == "true") {
-           STAGES.add("Quality Gates")
-         }
-         if (env.DeployCustomApi == "true") {
-           STAGES.add("CustomAPI Deploy")
-         }
-         if (env.Notification == "true") {
-           STAGES.add("Notification")
-         }
-
 pipeline {
-    agent { docker { image 'maven:3.3.3' } }
-    stages {
-        stage("checkout"){
-                     def g = new git()
-                          g.Checkout("${config.GIT_URL}","${env.Branch}","${config.GIT_CREDENTIALS}")
+   agent any
+   stages {
+        stage('Checkout') {
+          steps {
+            git branch: "master", url:'https://github.com/RitreshGirdhar/Microservice_docker_jenkinsfile_deployment.git'
+          }
         }
-        stage('build') {
+        stage('Build') {
             steps {
-                sh 'mvn --version'
+                sh "mvn clean install"
             }
         }
-    }
-}
+        stage('push Registry') {
+          steps {
+              sh "pwd"
+              sh "docker tag microservice1:latest 10.202.11.133:5000/microservice1:latest"
+              sh "docker push 10.202.11.133:5000/microservice1:latest"
+          }
+        }
+        stage('deploy') {
+          steps {
+            sh """
+              cd ansible_deployment
+              ansible-playbook -i hosts playbooks/deploy.yaml
+              """
+            }
+        }
+     }
+   }
