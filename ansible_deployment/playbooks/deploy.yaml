@@ -1,0 +1,56 @@
+---
+- name: Deploying Components on Dev Server
+  hosts: server
+  vars_files:
+    - vars/defaults.yml
+    - vars/app.yml
+  tasks:
+    - name: Checking directory.
+      stat:
+        path: "{{ INSTALL_DIR }}"
+      register: my_folder
+
+    - name: "echo if directory already existed"
+      debug:
+        msg: "the {{ INSTALL_DIR }} directory is already existed"
+      when: my_folder.stat.exists
+
+    - name: Create {{ INSTALL_DIR }} Directory to Install microservice
+      file:
+        path: "{{ INSTALL_DIR }}"
+        state: directory
+        recurse: true
+        mode: 0755
+      when: my_folder.stat.exists == false
+
+    - name: Create {{ INSTALL_DIR }}/{{ PROJECT_NAME }} Directory for Project
+      file:
+        path: "{{ INSTALL_DIR }}/{{ PROJECT_NAME }}"
+        state: directory
+        recurse: true
+        mode: 0755
+        
+    - name: Create Project Root Sub Directories
+      file:
+        path: "{{ item }}"
+        state: directory
+        recurse: true
+        mode: 0755
+      with_items:
+        - "{{ PROJECT_ROOT_SUBDIRS }}"
+
+    - name: Create docker-compose.yml from compose-full-stack.j2 Template
+      template:
+        src: templates/compose-full-stack.j2
+        dest: "{{ INSTALL_DIR }}/{{ PROJECT_NAME }}/docker-compose.yml"
+        mode: 0644
+
+    - name: Shut down docker compose if running
+      shell: "cd {{ INSTALL_DIR }}/{{ PROJECT_NAME }}/ && docker-compose down"
+      ignore_errors: yes
+
+    - name: Login to registry
+      shell: "docker login -u {{ registry_username }} -p {{ registry_password }} {{ selected_registry }}"
+
+    - name: Login Containers using docker-compose command
+      shell: "cd {{ INSTALL_DIR }}/{{ PROJECT_NAME }}/ && docker-compose pull && docker-compose up -d"

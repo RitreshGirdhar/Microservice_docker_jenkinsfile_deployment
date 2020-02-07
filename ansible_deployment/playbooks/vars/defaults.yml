@@ -1,0 +1,14 @@
+---
+### Installation Directory Structure 
+PACKAGES:
+  - wget
+  - epel-release
+
+GROUP: "root"
+OWNER: "root"
+
+INSTALL_DIR: "/app"
+
+PROJECT_ROOT_SUBDIRS:
+  - "{{ INSTALL_DIR }}/{{ PROJECT_NAME }}/logs"
+  - "{{ INSTALL_DIR }}/{{ PROJECT_NAME }}/properties"

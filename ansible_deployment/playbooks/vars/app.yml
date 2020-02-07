@@ -1,0 +1,7 @@
+---
+IMAGE: "10.202.11.133:5000/microservice1"
+MEMORY_LIMIT: "4096m"
+MEMORY_RESERVATION: "1024m"
+
+PROJECT_NAME: microservice-demo
+IMAGE_VERSION: "latest"
