@@ -1,15 +1,21 @@
 
-# WIP Docker based Microservice deployment via jenkinsfile
+# Docker based Microservice deployment via jenkinsfile
 Docker based Microservice - push to registry via Jenkins tool by defining steps in jenkinsfile
 
 #### Pre-requisite 
 * You should have docker installed on your machine.
+* Do set up jenkins on your local or server via docker as defined here https://github.com/RitreshGirdhar/jenkins-with-docker 
+* should have basic knowledge of docker
+* should have basic knowledge of ansible
+* should have basic knowledge of docker-compose
 
+
+Let's Checkout the code.
 ```$xslt
 mvn clean install 
 ```
 
-Check docker images by running below command
+Post build success , you will be able to see generated docker image by using below commands.
 ```$xslt
 $ docker images
 REPOSITORY                                                TAG                 IMAGE ID            CREATED              SIZE
@@ -63,11 +69,7 @@ pipeline {
      }
    }
 ```
-####WIP
 
-
-
-Set up jenkins via docker as defined here https://github.com/RitreshGirdhar/jenkins-with-docker 
 Once jenkins is up.
 
 Happy learning :) 
