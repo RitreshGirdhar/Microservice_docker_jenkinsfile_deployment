@@ -34,7 +34,8 @@ Here we are follow Declarative Pipelines
 * Is designed to make writing and reading Pipeline code easier.
 * Many of the individual syntactical components (or "steps") written into a Jenkinsfile.
 
-### Lets understand the JenkinsFile 
+### Let's understand the JenkinsFile 
+
 ```$xslt
 pipeline {
    agent any
@@ -69,6 +70,18 @@ pipeline {
      }
    }
 ```
+
+Here neither we are saving hardcoded details of any Docker registry's ip/port and credentials details nor we are saving hardcoded details of any server. We are configuring everything in Jenkins.
+
+Steps to configure List of docker registries
+* Login to Jenkins. Goto Manage Jenkins -> configuration Section
+* Goto environment section and add environment variable with name REGISTRY_<numericvalue>
+* 
+
+
+
+
+
 
 Once jenkins is up.
 
