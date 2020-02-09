@@ -127,8 +127,8 @@ Steps to configure List of docker registries
 ![Alt text](/images/Server1-credentials.png?raw=true "Server1 Credentials")
 
 ### Let's test this newly created Job.
-
-  
-
-
+![Alt text](/images/select_environment.png?raw=true "select environment")
+![Alt text](/images/select_registry.png?raw=true "select registry")
+![Alt text](/images/success.png?raw=true "successful deployment")
+ 
 Happy learning :) 
