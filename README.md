@@ -122,7 +122,13 @@ Steps to configure List of docker registries
 * Login to Jenkins. Goto Manage Jenkins -> configuration Section
 * Goto environment section and add environment variable with name REGISTRY_<IntValue>. IntValue represents lists of Registry servers.
 * Now add list of Servers in same environment section. where you want to deploy the microservices. Use this format SERVER_<IntValue>
+![Alt text](/images/environment-variables.png?raw=true "Environment Variables")
+![Alt text](/images/registry-credentials.png?raw=true "Registry Credentials")
+![Alt text](/images/Server1-credentials.png?raw=true "Server1 Credentials")
 
-Once jenkins is up.
+### Let's test this newly created Job.
+
+  
+
 
 Happy learning :) 
